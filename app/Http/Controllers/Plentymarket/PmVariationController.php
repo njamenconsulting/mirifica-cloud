@@ -79,7 +79,7 @@ class PmVariationController extends Controller
 
                     #If the updating it's ok, we store date into report table
                     if($queryPrice) $this->_updateReportService->create("price",$variation, $product);
-                    else die("The price updating runned bad");
+                    else die("The price updating runned bad");#
                 }
                 #If the stock is different, then we shall do update
                 if($variation['stock']!=$product->stock){
