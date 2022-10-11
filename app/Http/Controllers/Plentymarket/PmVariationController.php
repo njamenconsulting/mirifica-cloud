@@ -15,7 +15,7 @@ class PmVariationController extends Controller
     private $_pmApiService;
     private $_pmvariationModel;
     private $_trenzProductModel;
-    private $_productNotOffered;
+    private $_productNotOfferedModel ;
     private $_updateReportService;
 
     public function __construct(PmApiService $pmApiService,

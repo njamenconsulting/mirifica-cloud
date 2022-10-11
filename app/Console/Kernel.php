@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Http\Controllers\Plentymarket\PmShopController;
+use App\Http\Controllers\Plentymarket\PmVariationController;
+use App\Http\Controllers\Trenz\TrenzProductController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +19,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            (new TrenzProductController)->updateOrInsert();
+            (new PmVariationController())->update();
+            (new PmShopController())->updateSalesPrice();
+            (new PmShopController())->updateStock();
+        })->everyMinute();
+
     }
 
     /**
