@@ -30,13 +30,14 @@ class PmShopController extends Controller
         $variations = $this->_updateReportModel->where('fieldname','price')->get()->toArray();
         $this->_updateShopVariationPriceService->runSalePriceUpdate($variations);
 
-        dd($variations);
+        $this->_updateShopVariationPriceService->where('fieldname','price')->delete();
+
     }
     public function updateStock()
     {
         $results = $this->_updateReportModel->where('fieldname','stock')->get()->toArray();
         $this->_updateShopVariationStockService->runStockUpdate($results);
 
-        dd($results);
+        $this->_updateShopVariationPriceService->where('fieldname','stock')->delete();
     }
 }

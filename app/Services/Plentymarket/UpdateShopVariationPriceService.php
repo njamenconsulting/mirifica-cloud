@@ -3,6 +3,7 @@
 namespace App\Services\Plentymarket;
 
 use App\Helpers\ArrayToCsvHelper;
+use App\Models\UpdateReport;
 use App\Services\Api\CurlService;
 use App\Services\Api\TokenService;
 
@@ -66,7 +67,6 @@ class UpdateShopVariationPriceService
             $responses[$i] = $response;
            // if(array_key_exists('success',$response)) ArrayToCsvHelper::createCsvFileFromArray("price_update_report",$fields,false,";");
         }
-       // dd($responses);
 
     }
 

@@ -67,7 +67,7 @@ class UpdateShopVariationStockService
 
             $response = CurlService::makeHttpRequest($method, $url,$this-> _header,$fields);
 
-            if($response) ArrayToCsvHelper::createCsvFileFromArray("stock_update_report",$fields['corrections'],false,";");
+            //if($response) ArrayToCsvHelper::createCsvFileFromArray("stock_update_report",$fields['corrections'],false,";");
         }
 
     }
