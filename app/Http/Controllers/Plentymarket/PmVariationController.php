@@ -34,7 +34,7 @@ class PmVariationController extends Controller
     {
         $start_time=microtime(true);
 
-        $response = $this->_pmApiService->getAllVariations();
+        $response = $pmApiService->getAllVariations();
 
         foreach ($response as $key => $value)
         {
@@ -48,7 +48,7 @@ class PmVariationController extends Controller
                // 'stock2'=> $value['base']['stock'][1]['stockPhysical']
             ];
 
-            $result[$key] = $this->_pmvariationModel->upsert($variations[$key],['variationId'],['itemId','externalId','salesPriceId','price','stock']);
+            $result[$key] = $pmvariationModel->upsert($variations[$key],['variationId'],['itemId','externalId','salesPriceId','price','stock']);
         }
 
         $end_time=microtime(true);

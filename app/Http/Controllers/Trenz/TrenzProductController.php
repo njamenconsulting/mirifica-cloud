@@ -27,7 +27,7 @@ class TrenzProductController extends Controller
         /* Retrieving all Trenz articles filtered by active or not*/
 
         $response = $this-> _trenzApiService->getAllArticles(1);
-
+dd($response);
         if(!$response['success']) echo "Request error";
 
         $products = $response['data'];

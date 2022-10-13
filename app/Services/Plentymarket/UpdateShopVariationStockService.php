@@ -40,6 +40,7 @@ class UpdateShopVariationStockService
      */
     public function runStockUpdate(Array $variations)
     {
+        $updatedVariations = array();
         $url = $this->_url."/rest/stockmanagement/warehouses/1/stock/correction";
 
         $method = "PUT";
@@ -63,12 +64,14 @@ class UpdateShopVariationStockService
                 if($j!=0) $fields[$j] = array_merge($fields[$j-1], $field);
             }
 
-            $fields = ["corrections" => $fields];
+            $updatedVariations = ["corrections" => $fields];
 
             $response = CurlService::makeHttpRequest($method, $url,$this-> _header,$fields);
 
-            //if($response) ArrayToCsvHelper::createCsvFileFromArray("stock_update_report",$fields['corrections'],false,";");
+            dd($response);
+
         }
+        return  $updatedVariations;
 
     }
 }

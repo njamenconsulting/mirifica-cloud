@@ -53,7 +53,19 @@ class PmApiService
 
        // $url = $this->_url."/rest/pim/variations?=_with=base.stock,salesPrices,categories&anyCategoryId=29,30&itemsPerPage=250&page=".$page;
 
-        return $variations;
+        foreach ($variations as $key => $value) {
+
+            $data[$key] = [
+                                'itemId' => $value['base']['itemId'],
+                                'variationId' => $value['id'],
+                                'externalId' => (int)$value['base']['externalId'],
+                                'salesPriceId' => (int)$value['salesPrices'][0]['salesPriceId'],
+                                'price' => $value['salesPrices'][0]['price'],
+                                'stock' => $value['base']['stock'][0]['stockPhysical'],
+                                // 'stock2'=> $value['base']['stock'][1]['stockPhysical']
+                            ];
+        }
+        return $data;
     }
 
 }
