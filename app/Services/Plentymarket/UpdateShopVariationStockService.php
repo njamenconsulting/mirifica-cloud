@@ -34,13 +34,17 @@ class UpdateShopVariationStockService
     }
 
     /**
+     * Corrects stock. The ID of the warehouse must be specified.
      * https://developers.plentymarkets.com/en-gb/plentymarkets-rest-api/index.html#/StockManagement/put_rest_stockmanagement_warehouses__warehouseId__stock_correction
      * @param array $variations
      * @return mixed
      */
     public function runStockUpdate(Array $variations)
     {
-        $updatedVariations = array();
+        //$warehouseId =1;
+        $updatedVariations = array();# Variation which have been updated in PM system
+
+
         $url = $this->_url."/rest/stockmanagement/warehouses/1/stock/correction";
 
         $method = "PUT";
@@ -53,22 +57,22 @@ class UpdateShopVariationStockService
 
             for ($j=0; $j < 50; $j++) {
 
-                $field = [
-                    'variationId'=> $variations[$j]['variationId'], #The ID of the variation
-                    'reasonId' => 301, #The reason for correction. The following reasons are available:301: Stock correction
-                    'quantityj' => (int)$variations[$j]['new_value'], #The quantity of the variation
-                    'storageLocationId' => 0 #The ID of the storage location
-                ];
+                if(array_key_exists($j,$variations)) {
+                    $field = [
+                        'variationId' => $variations[$j]['variationId'], #The ID of the variation
+                        'reasonId' => 301, #The reason for correction. The following reasons are available:301: Stock correction
+                        'quantity' => (int)$variations[$j]['new_value'], #The quantity of the variation
+                        'storageLocationId' => 0 #The ID of the storage location
+                    ];
 
-                $fields[0] = $field;
-                if($j!=0) $fields[$j] = array_merge($fields[$j-1], $field);
+                    $fields[0] = $field;
+                    if ($j != 0) $fields[$j] = array_merge($fields[$j - 1], $field);
+                }
             }
 
-            $updatedVariations = ["corrections" => $fields];
+            $fields = ["corrections" => $fields];
 
-            $response = CurlService::makeHttpRequest($method, $url,$this-> _header,$fields);
-
-            dd($response);
+            CurlService::makeHttpRequest($method, $url,$this-> _header,$fields);
 
         }
         return  $updatedVariations;

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\ArrayToCsvHelper;
 use App\Models\TrenzProducts;
 use App\Services\Plentymarket\SearchUpdatedVariationsService;
 use App\Services\Plentymarket\UpdateShopVariationStockService;
@@ -31,10 +32,14 @@ class UpdateStock extends Command
     public function handle(SearchUpdatedVariationsService $searchUpdatedVariationsService,
                            UpdateShopVariationStockService $shopVariationStockService)
     {
-
-        $products = TrenzProducts::all();
+        #Retrieve Trenz products
+        $products = TrenzProducts::all()->toArray();
+        #Compare the price and stock values of each PM variation with his image in Trenz
         $variations = $searchUpdatedVariationsService->checkStockUpdate($products);
+        #run update in PM system
         $shopVariationStockService->runStockUpdate($variations);
+        #store updated variation list in csv file to the report
+        ArrayToCsvHelper::createCsvFileFromArray("price_update_report",$variations,false,";");
 
         return Command::SUCCESS;
     }
