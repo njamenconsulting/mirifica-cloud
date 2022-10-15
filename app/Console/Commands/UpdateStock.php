@@ -15,14 +15,14 @@ class UpdateStock extends Command
      *
      * @var string
      */
-    protected $signature = 'pm:updateVariationStock';
+    protected $signature = 'pmvariation:updatestock';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Corrects stock of variations in the same warehouse';
 
     /**
      * Execute the console command.

@@ -42,8 +42,6 @@ class UpdateShopVariationStockService
     public function runStockUpdate(Array $variations)
     {
         //$warehouseId =1;
-        $updatedVariations = array();# Variation which have been updated in PM system
-
 
         $url = $this->_url."/rest/stockmanagement/warehouses/1/stock/correction";
 
@@ -75,7 +73,5 @@ class UpdateShopVariationStockService
             CurlService::makeHttpRequest($method, $url,$this-> _header,$fields);
 
         }
-        return  $updatedVariations;
-
     }
 }

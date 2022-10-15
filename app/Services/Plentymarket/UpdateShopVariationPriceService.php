@@ -32,6 +32,7 @@ class UpdateShopVariationPriceService
     }
 
     /**
+     * Updates up to 50 prices of variations. The ID of the variation, the ID of the sales price and a price must be specified.
      * Updating variation sales price data https://developers.plentymarkets.com/en-gb/developers/main/rest-api-guides/bulk-routes.html
      * @param array $variations
      * @return void
@@ -49,24 +50,28 @@ class UpdateShopVariationPriceService
 
             for ($j=0; $j < 50; $j++) {
 
-                # price Gross calculation by adding VAT of 19%
-                $priceGross = $variations[$j]['new_value'] + $variations[$j]['new_value']  * $this->_vat;
+                if(array_key_exists($j,$variations)) {
 
-                $field = [
-                    'variationId' => $variations[$j]['variationId'], #The ID of the variation
-                    'salesPriceId' => 1, # $variations[$j]['salesPriceId'],The ID of the sales price
-                    'price' => $priceGross #A new price for the sales price/variation combination
-                ];
-;
-                $fields[0] = $field;
-                if($j!=0) $fields[$j] = array_merge($fields[$j-1], $field);
+                    # price Gross calculation by adding VAT of 19%
+                    $priceGross = $variations[$j]['new_value'] + $variations[$j]['new_value'] * $this->_vat;
+
+                    $field = [
+                        'variationId' => $variations[$j]['variationId'], #The ID of the variation
+                        'salesPriceId' => 1, # $variations[$j]['salesPriceId'],The ID of the sales price
+                        'price' => $priceGross #A new price for the sales price/variation combination
+                    ];;
+                    $fields[0] = $field;
+                    if ($j != 0) $fields[$j] = array_merge($fields[$j - 1], $field);
+                }
             }
 
             $response = CurlService::makeHttpRequest($method, $url, $this-> _header,$fields);
 
             $responses[$i] = $response;
-           // if(array_key_exists('success',$response)) ArrayToCsvHelper::createCsvFileFromArray("price_update_report",$fields,false,";");
+
         }
+        if(array_key_exists('success',$response)) ArrayToCsvHelper::createCsvFileFromArray("price_update_report",$fields,false,";");
+        dd( $responses);
 
     }
 

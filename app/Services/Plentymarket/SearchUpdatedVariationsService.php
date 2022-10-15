@@ -18,36 +18,42 @@ class SearchUpdatedVariationsService
 
     public function checkSalesPriceUpdate($data):array
     {
+        $j=0;
+        $variations = array();
+
         foreach ($data as $key => $product){
 
-            $result = $this->_pmvariationModel->where('externalId', $product->productId)->get()->toArray();
+            $result = $this->_pmvariationModel->where('externalId', $product['productId'])->get()->toArray();
 
             if (count($result)>0) {
                 $variation = $result[0];
 
                 #If the price is different, then we shall do update
-                if($variation['price'] != $product->price) {
-
+                if($variation['price'] != $product['price']) {
+/*
                     try {
-                        $queryPrice = $this->_pmvariationModel->where('externalId', $product->productId)
-                                                              ->update(['price' => $product->price]);
-
+                        $this->_pmvariationModel->where('externalId', $product['productId'])
+                                                              ->update(['price' => $product['price']]);
                     }
-                    catch (\Exception $exception){}
-
-                    return [
-                        'fieldname' =>'price',
-                        'itemId' => $variation['itemId'],
-                        'variationId' => $variation['variationId'],
-                        'externalId'=> $variation['externalId'],
-                        'salesPriceId'=>$variation['salesPriceId'],
-                        'old_value' => $variation['price'],
-                        'new_value' => $product->price,
-                    ];
-
+                    catch (\Exception $exception){
+                        echo $exception->getMessage();
+                    }
+*/
+                    $variations[$j] = [
+                                        'fieldname' =>'price',
+                                        'itemId' => $variation['itemId'],
+                                        'variationId' => $variation['variationId'],
+                                        'externalId'=> $variation['externalId'],
+                                        'salesPriceId'=>$variation['salesPriceId'],
+                                        'old_value' => $variation['price'],
+                                        'new_value' => $product['price']
+                                    ];
+                    $j++;
                 }
             }
         }
+
+        return $variations;
     }
 
     /**
