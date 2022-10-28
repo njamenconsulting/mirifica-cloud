@@ -39,7 +39,7 @@ class PmApiService
             $url = $this->_url."/rest/pim/variations/scroll?cursor=".$cursor;
             $params =[
                 'with' => 'base.stock,salesPrice,salesPrices.salesPrice,categories',
-                'anyCategoryId' => '29,30',
+                'anyCategoryId' => '77',
             ];
             $response = CurlService::makeHttpRequest($method, $url,$this-> _header, $params);
 

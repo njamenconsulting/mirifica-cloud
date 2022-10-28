@@ -31,7 +31,7 @@ class GetPmVariations extends Command
     public function handle(PmVariations $pmvariationModel, PmApiService $pmApiService, SearchUpdatedVariationsService $checkUpdateService)
     {
         $variations = $pmApiService->getAllVariations();
-
+     
         $result = $pmvariationModel->upsert($variations,['variationId'],['itemId','externalId','salesPriceId','price','stock']);
 
         return Command::SUCCESS;
