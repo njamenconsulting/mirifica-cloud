@@ -1,0 +1,10 @@
+fieldname,itemId,variationId,externalId,salesPriceId,old_value,new_value
+stock,100495,1662,2397,1,0,-10
+stock,100608,1775,2754,1,-2,0
+stock,100614,1781,2797,1,0,-1
+stock,100689,1856,2974,1,45,43
+stock,100863,2113,3196,1,8,7
+stock,100851,2101,3180,1,0,19
+stock,100902,2152,3252,1,0,2
+stock,101395,2688,3463,1,-60,0
+stock,101394,2687,3462,1,-25,0

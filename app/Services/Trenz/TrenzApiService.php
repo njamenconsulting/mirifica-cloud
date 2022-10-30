@@ -50,7 +50,12 @@ class TrenzApiService
             {
 
                 $response = $this->getArticleById($product[$i]['id']);
+
                 $productPrice = $response['data']['mainDetail']['prices'][0]['price'];
+                $productPseudoPrice = $response['data']['mainDetail']['prices'][0]['pseudoPrice'];
+
+                if($productPseudoPrice !=0) $productPrice =$productPseudoPrice;
+
                 $data[$i] = array(
                     'productId' =>$product[$i]['id'],
                     'price' =>$productPrice,

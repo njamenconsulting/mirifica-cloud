@@ -7,6 +7,7 @@ use App\Http\Controllers\Plentymarket\PmVariationController;
 use App\Http\Controllers\Trenz\TrenzProductController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Artisan;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,12 +20,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        //trenzproducts:getlist
+        //pmvariation:getdata
+        //pmvariation:updatestock
+        //pmvariation:updateprice
         $schedule->call(function () {
-            (new TrenzProductController)->updateOrInsert();
-            (new PmVariationController())->update();
-            (new PmShopController())->updateSalesPrice();
-            (new PmShopController())->updateStock();
-        })->everyMinute();
+            Artisan::call("trenzproducts:getlist");
+            Artisan::call("pmvariation:getdata");
+            Artisan::call("pmvariation:updatestock");
+            Artisan::call("pmvariation:updateprice");
+        })->everyTwoHours();
 
     }
 

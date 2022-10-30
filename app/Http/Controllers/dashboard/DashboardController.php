@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $trenzProducts = $this->_trenzProductModel->count();;
         $pmVariations = $this->_pmvariationModel->count();
 
-        dd($trenzProducts,$pmVariations);
+  
         return view('dashboard.index')->with(['trenz'=>$trenzProducts])
                                            ->with(['pm'=>$pmVariations]);
     }
