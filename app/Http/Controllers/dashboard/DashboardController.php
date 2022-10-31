@@ -22,8 +22,9 @@ class DashboardController extends Controller
         $trenzProducts = $this->_trenzProductModel->count();;
         $pmVariations = $this->_pmvariationModel->count();
 
-        $output = shell_exec('grep cron /var/log/syslog');
+        $output = shell_exec('tail -f /var/log/syslog | grep CRON');
     echo "<pre>$output</pre>";
+    dd($output );
 
   
         return view('dashboard.index')->with(['trenz'=>$trenzProducts])
