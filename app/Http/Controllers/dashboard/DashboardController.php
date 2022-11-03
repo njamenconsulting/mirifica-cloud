@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $trenzProducts = $this->_trenzProductModel->count();;
         $pmVariations = $this->_pmvariationModel->count();
 
-        $output = shell_exec('tail -f /var/log/syslog | grep CRON');
+        $output = shell_exec('head -f /var/log/cron.log');
     echo "<pre>$output</pre>";
     dd($output );
 

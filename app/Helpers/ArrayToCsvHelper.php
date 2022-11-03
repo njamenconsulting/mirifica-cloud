@@ -9,7 +9,8 @@ class ArrayToCsvHelper
 
         $filename = date('Ymd-His') . '-' . $filename . '.csv';
 
-        $path = public_path('csv_reports/' . $filename);
+        //$path = public_path('csv_reports/' . $filename);
+        $path = storage_path('app/public/').''.$filename;
 
         # Configure fopen to create, open, and write data.
         $fp = fopen($path, 'a');
