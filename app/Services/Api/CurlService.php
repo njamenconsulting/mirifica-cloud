@@ -6,7 +6,7 @@ class CurlService
 {
     public static function makeHttpRequest($method, $url,$header,$data)
     {
-
+//dd($method, $url,$header,$data);
         $curl = curl_init();//Initialize the cURL session
         //https://curl.se/docs/caextract.html
         $certificate_path = public_path('certs/cacert.pem');
