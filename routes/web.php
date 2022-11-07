@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Element14Controller;
 use App\Http\Controllers\MouserController;
 use App\Http\Controllers\dashboard\DashboardController;
 
@@ -33,3 +34,10 @@ Route::controller(MouserController::class)->group(function () {
     Route::get('mouser/keywordSearch', 'getFormKeywordSearch')->name('mouser.keywordSearch');
     Route::post('mouser/keywordSearch', 'postFormKeywordSearch')->name('mouser.keywordSearch');
 });
+
+Route::controller(Element14Controller::class)->group(function () {
+    Route::get('element14', 'index');
+    Route::get('element14/keywordSearch', 'getFormKeywordSearch');
+    Route::post('element14/keywordSearch', 'postFormKeywordSearch');
+});
+
