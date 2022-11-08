@@ -37,7 +37,7 @@ Route::controller(MouserController::class)->group(function () {
 
 Route::controller(Element14Controller::class)->group(function () {
     Route::get('element14', 'index');
-    Route::get('element14/keywordSearch', 'getFormKeywordSearch');
-    Route::post('element14/keywordSearch', 'postFormKeywordSearch');
+    Route::get('element14/keywordSearch', 'getFormKeywordSearch')->name('element14.keywordSearch');
+    Route::post('element14/keywordSearch', 'postFormKeywordSearch')->name('element14.keywordSearch');
 });
 

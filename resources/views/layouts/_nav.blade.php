@@ -11,7 +11,6 @@
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : ''}}"
                 aria-current="page" href="{{ route('dashboard.index') }}">
-
                     PM <=> TRENZ
                 </a>
             </li>
@@ -32,8 +31,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link "
-                aria-current="page" href="#">
+            <a class="nav-link {{ request()->routeIs('element14.keywordSearch') ? 'active' : ''}}"
+                aria-current="page" href="{{ route('element14.keywordSearch') }}">
                     Element14
                 </a>
             </li>

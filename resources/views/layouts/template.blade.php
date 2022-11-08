@@ -14,7 +14,6 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/sidekbars.css') }}" rel="stylesheet">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
